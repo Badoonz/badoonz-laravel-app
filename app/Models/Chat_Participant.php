@@ -7,5 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Chat_Participant extends Model
 {
-    use HasFactory;
+    public function chat_participant()
+
+    {
+
+        return $this->belongsTo(Chat::class);
+
+    }
 }
