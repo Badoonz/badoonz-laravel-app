@@ -20,17 +20,17 @@ class GenerateCommand extends Command
         $telegramChat = $telegramUpdate->getChat();
 
         $participantsNumber = DB::table('chat_participants')
-                                    ->count()
-                                    ->where('chat_id', '=', $telegramChat->id);
+                                    ->where('chat_id', '=', $telegramChat->id)
+                                    ->count();
 
         if($participantsNumber >= 2)
-        try {
-            Chat_Participant::getRandomPairs($telegramChat->id);
+            try {
+                Chat_Participant::getRandomPairs($telegramChat->id);
 
-            $this->replyWithMessage(['text' => 'Done']);
-        } catch (\Exception $exception) {
-            $this->replyWithMessage(['text' => "Oops... Something went wrong. {$exception->getMessage()}"]);
-        }
+                $this->replyWithMessage(['text' => 'Done']);
+            } catch (\Exception $exception) {
+                $this->replyWithMessage(['text' => "Oops... Something went wrong. {$exception->getMessage()}"]);
+            }
         else
             $this->replyWithMessage(['text' => "Number of participants is less than two"]);
 
