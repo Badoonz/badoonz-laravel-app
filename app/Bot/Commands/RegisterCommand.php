@@ -3,6 +3,7 @@
 namespace App\Bot\Commands;
 
 use App\Models\Chat;
+use App\Models\Chat_Participant;
 use Telegram\Bot\Actions;
 use Telegram\Bot\Commands\Command;
 use Illuminate\Support\Facades\DB;
@@ -46,15 +47,13 @@ class RegisterCommand extends Command
                 ->first();
 
             if(!$chat)
-                $chat = $this->registerChat(
-                    $telegramChat->id
-            );
+                $this->registerChat($telegramChat->id);
 
-            $this->registerMember(
-                $telegramUser->id,
-                $telegramUser->firstName,
-                $telegramUser->lastName,
-                $chat
+                $this->registerMember(
+                    $telegramUser->id,
+                    $telegramUser->firstName,
+                    $telegramUser->lastName,
+                    $this->registerChat($telegramChat->id)
             );
 
             $this->replyWithMessage(['text' => 'Done']);
