@@ -7,11 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Chat_Participant extends Model
 {
-    public function chat_participant()
-
+    public function chats()
     {
-
         return $this->belongsTo(Chat::class);
-
     }
 }

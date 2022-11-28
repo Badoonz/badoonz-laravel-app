@@ -8,11 +8,10 @@ use \Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Chat extends Model
 {
-    public function chat()
+    public function chatParticipants()
 
     {
-
         return $this->hasMany(Chat_Participant::class);
-
     }
+
 }

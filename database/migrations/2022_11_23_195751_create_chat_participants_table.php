@@ -15,7 +15,8 @@ return new class extends Migration
     {
         Schema::create('chat_participants', function (Blueprint $table) {
             $table->id('participant_id');
-            $table->string('participant_name');
+            $table->string('first_name');
+            $table->string('last_name');
             $table->foreignId('chat_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
 
