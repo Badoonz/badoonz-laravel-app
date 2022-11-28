@@ -4,7 +4,6 @@ namespace App\Bot\Commands;
 
 use App\Models\Chat;
 use App\Models\Chat_Participant;
-use Telegram\Bot\Actions;
 use Telegram\Bot\Commands\Command;
 use Illuminate\Support\Facades\DB;
 
@@ -13,26 +12,7 @@ class RegisterCommand extends Command
 
     protected $name = "register";
 
-    protected $description = "Register Command to get you started";
-
-    public function registerChat($chat_id)
-    {
-        DB::table('chats')->insert([
-           'chat_id' => $chat_id
-        ]);
-
-        return $chat_id;
-    }
-
-    public function registerMember($participant_id, $first_name, $last_name, $chat_id)
-    {
-        DB::table('chat_participants')->insert([
-            'participant_id' => $participant_id,
-            'first_name' => $first_name,
-            'last_name' => $last_name,
-            'chat_id' => $chat_id
-        ]);
-    }
+    protected $description = "Register Command to add you to Random Coffee";
 
     public function handle()
     {
@@ -47,13 +27,13 @@ class RegisterCommand extends Command
                 ->first();
 
             if(!$chat)
-                $this->registerChat($telegramChat->id);
+                Chat::registerChat($telegramChat->id);
 
-                $this->registerMember(
+                Chat_Participant::registerMember(
                     $telegramUser->id,
                     $telegramUser->firstName,
                     $telegramUser->lastName,
-                    $this->registerChat($telegramChat->id)
+                    $telegramChat->id
             );
 
             $this->replyWithMessage(['text' => 'Done']);

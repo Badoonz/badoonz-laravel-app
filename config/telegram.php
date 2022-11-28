@@ -35,7 +35,9 @@ return [
             'webhook_url'         => env('TELEGRAM_WEBHOOK_URL', 'YOUR-BOT-WEBHOOK-URL'),
             'commands'            => [
                 App\Bot\Commands\StartCommand::class,
-                App\Bot\Commands\RegisterCommand::class
+                App\Bot\Commands\RegisterCommand::class,
+                App\Bot\Commands\UnregisterCommand::class,
+                App\Bot\Commands\GenerateCommand::class
             ],
         ],
 
