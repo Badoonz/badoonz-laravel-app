@@ -3,7 +3,7 @@
 namespace App\Bot\Commands;
 
 use App\Models\Chat;
-use App\Models\Chat_Participant;
+use App\Models\ChatParticipant;
 use Telegram\Bot\Commands\Command;
 use Illuminate\Support\Facades\DB;
 
@@ -25,7 +25,7 @@ class GenerateCommand extends Command
 
         if($participantsNumber >= 2)
             try {
-                Chat_Participant::getRandomPairs($telegramChat->id);
+                ChatParticipant::getRandomPairs($telegramChat->id);
 
                 $this->replyWithMessage(['text' => 'Done']);
             } catch (\Exception $exception) {

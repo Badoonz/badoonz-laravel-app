@@ -3,7 +3,7 @@
 namespace App\Bot\Commands;
 
 use App\Models\Chat;
-use App\Models\Chat_Participant;
+use App\Models\ChatParticipant;
 use Telegram\Bot\Commands\Command;
 use Illuminate\Support\Facades\DB;
 
@@ -29,7 +29,7 @@ class RegisterCommand extends Command
             if(!$chat)
                 Chat::registerChat($telegramChat->id);
 
-                Chat_Participant::registerMember(
+                ChatParticipant::registerMember(
                     $telegramUser->id,
                     $telegramUser->firstName,
                     $telegramUser->lastName,
